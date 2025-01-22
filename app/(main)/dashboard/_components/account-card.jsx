@@ -1,21 +1,22 @@
 "use client";
 
-import { updateDefaultAccount } from "@/actions/accounts";
-import { 
-  Card, 
-  CardContent, 
-  CardFooter, 
-  CardHeader, 
-  CardTitle 
+import { ArrowUpRight, ArrowDownRight, CreditCard } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { Badge } from "@/components/ui/badge";
+import { useEffect } from "react";
+import useFetch from "@/hooks/use-fetch";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
-import {Switch } from "@/components/ui/switch";
-import useFetch from "@hooks/use-fetch";
-import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import { updateDefaultAccount } from "@/actions/account";
 import { toast } from "sonner";
 
-const AccountCard = ({ account }) => {
+export function AccountCard({ account }) {
   const { name, type, balance, id, isDefault } = account;
 
   const {
@@ -25,12 +26,12 @@ const AccountCard = ({ account }) => {
     error,
   } = useFetch(updateDefaultAccount);
 
-  const handleDefaultChange = async () => {
-    event.preventDefault();
+  const handleDefaultChange = async (event) => {
+    event.preventDefault(); // Prevent navigation
 
     if (isDefault) {
       toast.warning("You need atleast 1 default account");
-      return; // No togglig off the default account
+      return; // Don't allow toggling off the default account
     }
 
     await updateDefaultFn(id);
@@ -39,16 +40,16 @@ const AccountCard = ({ account }) => {
   useEffect(() => {
     if (updatedAccount?.success) {
       toast.success("Default account updated successfully");
-    }  
-  }, [updatedAccount, updateDefaultLoading]);
+    }
+  }, [updatedAccount]);
 
   useEffect(() => {
     if (error) {
-      toast.error(error.message || "Failed to updated default account");
-    }  
+      toast.error(error.message || "Failed to update default account");
+    }
   }, [error]);
 
-  return ( 
+  return (
     <Card className="hover:shadow-md transition-shadow group relative">
       <Link href={`/account/${id}`}>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -81,8 +82,5 @@ const AccountCard = ({ account }) => {
         </CardFooter>
       </Link>
     </Card>
-
   );
-};
-
-export default AccountCard;
+}
