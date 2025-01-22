@@ -16,7 +16,7 @@ const AccountsPage = async ({ params }) => {
 
   return (
     <div className="space-y-8 px-4 ">
-      <div className="flex gap-4 items-end jb">
+      <div className="flex gap-4 items-end j">
         <div>
           <h1 className="text-5xl sm:text-6xl font-bold gradient-title capitalise">
           {account.name}
@@ -35,12 +35,16 @@ const AccountsPage = async ({ params }) => {
           </p>
         </div>
       </div>
-      
 
       {/* Chart Section */}
+      <Suspense 
+        fallback={<BarLoader className="mt-4" width={"100%"} color="#9333ea"/>}
+      >
+        <AccountChart transactions={transactions} /> 
+      </Suspense>
       {/* Transaction Table */}
       <Suspense 
-        fallback={<BarLoader className="mt-4" width={{"100%"}} color="#9333ea"/>}
+        fallback={<BarLoader className="mt-4" width={"100%"} color="#9333ea"/>}
       >
         <TransactionTable transactions={transactions}/> 
       </Suspense>
