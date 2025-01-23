@@ -11,9 +11,9 @@ import {
 export const { GET, POST, PUT } = serve({
   client: inngest,
   functions: [
+    checkBudgetAlerts,
     processRecurringTransaction,
     triggerRecurringTransactions,
     generateMonthlyReports,
-    checkBudgetAlerts,
   ],
 });

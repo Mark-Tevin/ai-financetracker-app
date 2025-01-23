@@ -100,7 +100,7 @@ import {
               {/* AI Insights */}
               {data?.insights && (
                 <Section style={styles.section}>
-                  <Heading style={styles.heading}>Welth Insights</Heading>
+                  <Heading style={styles.heading}>Pesamind Intellect</Heading>
                   {data.insights.map((insight, index) => (
                     <Text key={index} style={styles.text}>
                       • {insight}
@@ -110,8 +110,8 @@ import {
               )}
   
               <Text style={styles.footer}>
-                Thank you for using Welth. Keep tracking your finances for better
-                financial health!
+                Thank you for using PesaMind. Keep tracking your finances for better
+                financial freedom!
               </Text>
             </Container>
           </Body>
