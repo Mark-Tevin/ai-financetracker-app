@@ -68,7 +68,7 @@ export async function updateDefaultAccount(accountId) {
       throw new Error("user not found");
     }
 
-    const account = await db.acount.findUnque({
+    const account = await db.account.findUnque({
       where: { id: accountId, userId },
       include: {
         transactions: {
